@@ -1,0 +1,29 @@
+<group>
+	<Person_Scale_X>1.15</Person_Scale_X>
+	<Person_Scale_Y>1.15</Person_Scale_Y>
+	<Ghost_Scale_X>1.15</Ghost_Scale_X>
+	<Ghost_Scale_Y>1.15</Ghost_Scale_Y>
+	<Kinect_Angle>15</Kinect_Angle>
+	<Ghost_Blur>4</Ghost_Blur>
+	<Show_Debug>0</Show_Debug>
+	<Scene_Rotation>0</Scene_Rotation>
+<group/>
+	<Flip_X>1</Flip_X>
+	<Flip_Y>0</Flip_Y>
+	<Ghost_Fade_Speed>56</Ghost_Fade_Speed>
+<Person_Offset_X>0</Person_Offset_X>
+	<Person_Offset_Y>0</Person_Offset_Y>
+	<Person_Pos_Scale_X>1</Person_Pos_Scale_X>
+	<Person_Pos_Scale_Y>1</Person_Pos_Scale_Y>
+	<Ghost_Offset_X>0</Ghost_Offset_X>
+	<Ghost_Offset_Y>0</Ghost_Offset_Y>
+<Top_Left_Corner_X>0</Top_Left_Corner_X>
+	<Top_Left_Corner_Y>0</Top_Left_Corner_Y>
+	<Top_Right_Corner_X>1</Top_Right_Corner_X>
+	<Top_Right_Corner_Y>0</Top_Right_Corner_Y>
+	<Bottom_Right_Corner_X>1</Bottom_Right_Corner_X>
+	<Bottom_Right_Corner_Y>1</Bottom_Right_Corner_Y>
+	<Bottom_Left_Corner_X>0</Bottom_Left_Corner_X>
+	<Bottom_Left_Corner_Y>1</Bottom_Left_Corner_Y>
+<Disable_Ghosts>0</Disable_Ghosts>
+</group>
