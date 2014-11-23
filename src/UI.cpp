@@ -62,18 +62,6 @@ void UI::init(ofxKinect *kinect, BlobRecorder *recorder, Keystone *keystone)
     
     
     
-    _gui.add(_corner1XSlider.setup("Top Left Corner X",0.0,-2.0,2.0));
-    _gui.add(_corner1YSlider.setup("Top Left Corner Y",0.0,-2.0,2.0));
-    
-    _gui.add(_corner2XSlider.setup("Top Right Corner X",1.0,-2.0,2.0));
-    _gui.add(_corner2YSlider.setup("Top Right Corner Y",0.0,-2.0,2.0));
-    
-    _gui.add(_corner3XSlider.setup("Bottom Right Corner X",1.0,-2.0,2.0));
-    _gui.add(_corner3YSlider.setup("Bottom Right Corner Y",1.0,-2.0,2.0));
-    
-    _gui.add(_corner4XSlider.setup("Bottom Left Corner X",0.0,-2.0,2.0));
-    _gui.add(_corner4YSlider.setup("Bottom Left Corner Y",1.0,-2.0,2.0));
-    
     //_gui.add(_increaseKinectAngleButton.setup("+ Kinect Angle"));
 	//_increaseKinectAngleButton.addListener(this,&UI::increaseKinectAngle);
     //_gui.add(_decreaseKinectAngleButton.setup("- Kinect Angle"));
@@ -162,17 +150,8 @@ bool UI::isEnabled()
 
 void UI::resetKeystone()
 {
-    _corner1XSlider=0.0f;
-    _corner1YSlider=0.0f;
+    _keystone->resetCorners();
     
-    _corner2XSlider=1.0f;
-    _corner2YSlider=0.0f;
-    
-    _corner3XSlider=1.0f;
-    _corner3YSlider=1.0f;
-    
-    _corner4XSlider=0.0f;
-    _corner4YSlider=1.0f;
     
     /*_gui.add(_corner1XSlider.setup("Top Left Corner X",0.0,-2.0,2.0));
     _gui.add(_corner1YSlider.setup("Top Left Corner Y",0.0,-2.0,2.0));

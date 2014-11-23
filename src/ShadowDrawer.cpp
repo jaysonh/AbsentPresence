@@ -49,12 +49,12 @@ void ShadowDrawer::draw(ofxCvContourFinder *contours,float x, float y, float w, 
             
             if(ui->isFlipX())
             {
-                pX = 1024-pX;
+                pX = CANVAS_WIDTH-pX;
             }
             
             if(ui->isFlipY())
             {
-                pY = 768-pY;
+                pY = CANVAS_HEIGHT-pY;
             }
             ofCurveVertex(pX, pY );
             //ofCurveVertex((contours->blobs[i].pts[j].x * X_SCALE -  CANVAS_WIDTH/2) * ui->getPersonScaleX(), (contours->blobs[i].pts[j].y * Y_SCALE -  CANVAS_HEIGHT/2) * ui->getPersonScaleY());

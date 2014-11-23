@@ -17,5 +17,5 @@ void ScreenMask::init()
 
 void ScreenMask::draw()
 {
-    _maskImage.draw(0,0,1024,768);
+    _maskImage.draw(0,0,1280,800);
 }

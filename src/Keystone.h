@@ -460,13 +460,13 @@ public:
         ofNoFill();
         ofPushMatrix();
         
-        for(int y = 0; y < 768; y+= 64)
+        for(int y = 0; y < 801; y+= 40)
         {
-            ofLine(0,y,1024,y);
+            ofLine(0,y,1280,y);
         }
-        for(int x = 0; x < 1024; x+= 64)
+        for(int x = 0; x < 1281; x+= 40)
         {
-            ofLine(x,0,x,768);
+            ofLine(x,0,x,800);
         }
         ofFill();
 	}

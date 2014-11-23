@@ -24,4 +24,4 @@ private:
     ofImage _maskImage;
     
 };
-#endif /* defined(__kinectExample__ScreenMask__) */
+#endif 

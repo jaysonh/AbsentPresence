@@ -29,7 +29,6 @@ public:
 	void draw();
 	void exit();
 	
-	void drawPointCloud();
 	
 	void keyPressed(int key);
 	void mouseDragged(int x, int y, int button);
@@ -47,9 +46,6 @@ public:
     
 	ofxKinect kinect;
 	
-#ifdef USE_TWO_KINECTS
-	ofxKinect kinect2;
-#endif
 	
 	ofxCvColorImage colorImg;
 	
@@ -91,4 +87,6 @@ public:
     ScreenMask screenMask;
     
     Keystone keystone;
+    
+    ofQTKitPlayer _backgroundVid;
 };

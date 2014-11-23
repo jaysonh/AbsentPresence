@@ -26,4 +26,6 @@
 	<Bottom_Left_Corner_X>0</Bottom_Left_Corner_X>
 	<Bottom_Left_Corner_Y>1</Bottom_Left_Corner_Y>
 <Disable_Ghosts>0</Disable_Ghosts>
+<Ghost_Pos_Scale_X>1</Ghost_Pos_Scale_X>
+	<Ghost_Pos_Scale_Y>1</Ghost_Pos_Scale_Y>
 </group>

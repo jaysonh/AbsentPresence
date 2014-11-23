@@ -50,12 +50,20 @@ void testApp::setup() {
 	ofSetFrameRate(25);
     
     keystone.init(0.0,0,1.0,0.0,1.0,1.0,0.0,1.0);
+    keystone.loadFromFile();
+    
+    
+    ofQTKitDecodeMode decodeMode = OF_QTKIT_DECODE_TEXTURE_ONLY;
+	
+    _backgroundVid.setPixelFormat(OF_PIXELS_RGBA);
+    _backgroundVid.loadMovie(BACKGROUND_VIDEO_PATH, decodeMode);
+    _backgroundVid.play();
 }
 
 //--------------------------------------------------------------
 void testApp::update() {
 	
-	ofBackground(100, 100, 100);
+	ofBackground(0, 0, 0);
 	
     if(kinect.isConnected())
     {
@@ -87,7 +95,7 @@ void testApp::displayInitScreen()
 {
     glPushMatrix();
     keystone.setModifying(true);
-    keystone.set(true,1024,768);
+    keystone.set(true,1280,800);
     ofSetColor(255);
     kinect.drawDepth(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     _font.drawString("Press Spacebar To Start Initialising\nMake sure no one is in detection area", 30, ofGetHeight()/2);
@@ -103,7 +111,7 @@ void testApp::displayRecordingGhostsScreen()
     
     ofClear(255,255,255,255);
         
-    shadowDrawer.draw(blobDetector.getContourFinder(),0,0,1024,768,&_ui);
+    shadowDrawer.draw(blobDetector.getContourFinder(),0,0,1280,800,&_ui);
     blur.end();
 
     ofSetColor(0 ,0,0);
@@ -132,22 +140,26 @@ void testApp::drawScene()
         blobDetector.drawBackgroundImage(10, 10, 400, 300);
         blobDetector.drawBlobImage(410, 10, 400, 300);
         blobDetector.drawOpenCVBlobs(10,310,400,300);
+       
         shadowDrawer.draw(blobDetector.getContourFinder(),410,310,400,300,&_ui);
         
         
     }else if(kinect.isConnected())
     {
         ofFbo ghostImages;
+        
         ghostImages.allocate(CANVAS_WIDTH,CANVAS_HEIGHT);
         ghostImages.begin();
+        
         ofClear(255,255,255,255);
+        //ofSetColor(255,0,255);
+        //ofRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+        _backgroundVid.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
         ofSetColor(255,255,255);
-        ofRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-        ofSetColor(255,255,255);
-        lastScreen.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-        ofSetColor(255,255,255, _ui.getGhostFadeSpeed() );
-        ofRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-        _blobRecorder.playBack(&_ui,0,0,1024,768);
+        //lastScreen.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+        //ofSetColor(255,255,255, _ui.getGhostFadeSpeed() );
+        //ofRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+        _blobRecorder.playBack(&_ui,0,0,1280,800);
         ghostImages.end();
         
         lastScreen = ghostImages;
@@ -164,23 +176,24 @@ void testApp::drawScene()
         
         ofSetColor(255,255,255);
         ghostImages.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-        shadowDrawer.draw(blobDetector.getContourFinder(),0,0,1024,768,&_ui);
+        shadowDrawer.draw(blobDetector.getContourFinder(),0,0,1280,800,&_ui);
         
         blur.end();
         fbo.end();
         
         glPushMatrix();
-        keystone.init(_ui.getCorner1X(),_ui.getCorner1Y(),
+        /*keystone.init(_ui.getCorner1X(),_ui.getCorner1Y(),
                       _ui.getCorner2X(),_ui.getCorner2Y(),
                       _ui.getCorner3X(),_ui.getCorner3Y(),
                       _ui.getCorner4X(),_ui.getCorner4Y());
-        
+        */
 		keystone.setModifying(_ui.isEnabled());
-        keystone.set(true,1024,768);
+        keystone.set(true,CANVAS_WIDTH,CANVAS_HEIGHT);
         ofSetColor(255,255,255);
         fbo.draw(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
         if(keystone.isModifying())
             keystone.drawBoundingBox();
+        ofSetColor(255,255,255);
         glPopMatrix();
         screenMask.draw();
         
@@ -190,7 +203,7 @@ void testApp::drawScene()
 void testApp::displayKinectErrorMsg()
 {
     ofSetColor(0,0,0);
-    ofRect(0,0,1024,768);
+    ofRect(0,0,1280,800);
     ofSetColor(255,255,255);
     _font.drawString("Error! No Kinect",50,50);
 }
@@ -221,48 +234,21 @@ void testApp::draw() {
                 break; 
             
         }
-    }else{
+    }else
             displayKinectErrorMsg();
-    }
     
 	syphonOut.publishScreen();
     
     _ui.draw();
 }
 
-void testApp::drawPointCloud() {
-	int w = 640;
-	int h = 480;
-	ofMesh mesh;
-	mesh.setMode(OF_PRIMITIVE_POINTS);
-	int step = 2;
-	for(int y = 0; y < h; y += step) {
-		for(int x = 0; x < w; x += step) {
-			if(kinect.getDistanceAt(x, y) > 0) {
-				mesh.addColor(kinect.getColorAt(x,y));
-				mesh.addVertex(kinect.getWorldCoordinateAt(x, y));
-			}
-		}
-	}
-	glPointSize(3);
-	ofPushMatrix();
-	// the projected points are 'upside down' and 'backwards' 
-	ofScale(1, -1, -1);
-	ofTranslate(0, 0, -1000); // center the points a bit
-	ofEnableDepthTest();
-	mesh.drawVertices();
-	ofDisableDepthTest();
-	ofPopMatrix();
-}
 
 //--------------------------------------------------------------
 void testApp::exit() {
 	//kinect.setCameraTiltAngle(0); // zero the tilt on exit
+    keystone.saveToFile();
 	kinect.close();
 	
-#ifdef USE_TWO_KINECTS
-	kinect2.close();
-#endif
 }
 
 //--------------------------------------------------------------

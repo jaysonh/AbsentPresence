@@ -103,10 +103,11 @@ void BlobRecorder::playBack(UI *ui,float x, float y, float w, float h)
             //ofTranslate(CANVAS_WIDTH/2,CANVAS_HEIGHT/2);
             ofRotate(ui->getSceneRotation());
             //smokeEmitter.draw(contours,ui);
-            ofSetColor(0,0,0,_ghostFade);
+                ofSetColor(0,0,0);
+            //ofSetColor(0,0,0,_ghostFade);
                 
-                if(_ghostFade < 255.0f)
-                    _ghostFade += GHOST_FADE_IN_SPEED;
+            //    if(_ghostFade < 255.0f)
+             //       _ghostFade += GHOST_FADE_IN_SPEED;
                 
            //printf("Playing back blob %i blob scene %i total blobs: %i total blobs in scene: %i\n", randomIndx, _currentPlayScene,savedSilhouettes.size(), play.size());
             for(int i = 0; i < b->_blobs.size();i++)
@@ -129,12 +130,12 @@ void BlobRecorder::playBack(UI *ui,float x, float y, float w, float h)
                    
                    if(ui->isFlipX())
                    {
-                       pX = 1024-pX;
+                       pX = 1280-pX;
                    }
                    
                    if(ui->isFlipY())
                    {
-                       pY = 768-pY;
+                       pY = 800-pY;
                    }
                    
                    ofCurveVertex(pX, pY );
